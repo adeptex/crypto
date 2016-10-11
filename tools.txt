@@ -3,7 +3,7 @@ https://www.cryptool.org/en/
 
 Common RSA attacks: 
   * Factorization
-  * Chinese remainder theorem
+  * Chinese remainder theorem (CRT)
   * Wiener 
   * Fermat
   * Lattice
