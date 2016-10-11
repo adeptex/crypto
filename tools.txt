@@ -1,6 +1,8 @@
 RSA / AES
 https://www.cryptool.org/en/
 
+https://github.com/hellman/libnum
+
 Common RSA attacks: 
   * Factorization
   * Chinese remainder theorem (CRT)
