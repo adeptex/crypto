@@ -3,6 +3,8 @@ https://www.cryptool.org/en/
 
 https://github.com/hellman/libnum
 
+https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Key_generation
+
 Common RSA attacks: 
   * Factorization
   * Chinese remainder theorem (CRT)
