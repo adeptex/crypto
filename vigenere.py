@@ -1,48 +1,23 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-import string, argparse
+import sys, string
 from itertools import cycle
 
-argsParser = argparse.ArgumentParser(description="Vigenere Encrypt/Decrypt")
-argsParser.add_argument("file", metavar="text file", nargs="?")
-argsParser.add_argument("key", metavar="key", nargs="?")
-args = argsParser.parse_args()
+if len(sys.argv) < 3:
+	sys.exit('Usage: vigenere.py key message')
 
+key = sys.argv[1].upper()
+cipher = sys.argv[2].upper()
+plain = ''
+table = {}
 
-def encrypt(key, plaintext):
-    """
-    Encrypt the string and return the ciphertext
-    http://programeveryday.com/post/implementing-a-basic-vigenere-cipher-in-python/
-    """
-    pairs = zip(plaintext, cycle(key))
-    result = ''
+for ch in string.ascii_uppercase:
+    ch_idx = string.ascii_uppercase.index(ch)
+    table[ch] = string.ascii_uppercase[ch_idx:] + string.ascii_uppercase[:ch_idx]
 
-    for pair in pairs:
-        total = reduce(lambda x, y: string.uppercase.index(x) + string.uppercase.index(y), pair)
-        result += string.uppercase[total % 26]
+for pair in zip(cycle(key), cipher):
+    k, c = pair
+    c_idx = table[k].index(c)
+    plain += string.ascii_uppercase[c_idx]
 
-    return result
-
-
-def decrypt(key, ciphertext):
-    """
-    Decrypt the string and return the plaintext
-    http://programeveryday.com/post/implementing-a-basic-vigenere-cipher-in-python/
-    """
-    pairs = zip(ciphertext, cycle(key))
-    result = ''
-
-    for pair in pairs:
-        total = reduce(lambda x, y: string.uppercase.index(x) - string.uppercase.index(y), pair)
-        result += string.uppercase[total % 26]
-
-    return result
-
-
-with open(args.file, "r") as f:
-	txt = f.read().strip().replace(" ","").replace("\n", "").upper()
-
-print 'Key: %s' % args.key
-print 'Plaintext: %s' % txt
-print 'Encrypted: %s' % encrypt(args.key, txt)
-print 'Decrypted: %s' % decrypt(args.key, txt)
+print('%s\n%s' % (plain, plain.lower()))
