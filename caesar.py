@@ -1,11 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys, string
 
 cipher = sys.argv[1].upper()
 
-charset = string.uppercase
+charset = string.ascii_uppercase
 
 for shift in range(27):
-	plain = [charset[(string.uppercase.index(c) + shift) % len(charset)] for c in cipher]
-	print "[%02d] %s" % (shift, "".join(plain))
+	plain = [charset[(charset.index(c) + shift) % len(charset)] for c in cipher]
+	plain = ''.join(plain)
+	print('[%02d] %s\t%s' % (shift, plain, plain.lower()))
